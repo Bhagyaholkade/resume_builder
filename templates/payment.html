@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Payment | Choose Plan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav h2 {
+      font-size: 28px;
+      color: #00c6ff;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00c6ff;
+    }
+
+    h1 {
+      font-size: 46px;
+      margin: 80px 0 20px;
+    }
+
+    p {
+      font-size: 20px;
+      color: #ddd;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #00c6ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s ease;
+      margin-top: 30px;
+    }
+
+    .btn:hover {
+      background: #0072ff;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h2>📄 Resume Builder</h2>
+    <div>
+      <a href="{{ url_for('home') }}">Home</a>
+      {% if user_name %}
+        <a href="{{ url_for('profile') }}">Hello, {{ user_name }} 👤</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('google.login') }}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <h1>💳 Confirm Your Payment</h1>
+  <p>You’ve selected: <strong>{{ resume_type }}</strong></p>
+  <p>Amount to Pay: <strong>₹{{ price }}</strong></p>
+
+  <div style="margin: 40px 0;">
+    <button id="pay-btn" class="btn">Pay ₹{{ price }} Now</button>
+  </div>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    document.getElementById('pay-btn').onclick = function(e){
+      var options = {
+        "key": "YOUR_RAZORPAY_KEY_ID",
+        "amount": "{{ price }}" * 100,
+        "currency": "INR",
+        "name": "Resume Builder",
+        "description": "{{ resume_type }} Payment",
+        "image": "https://img.icons8.com/fluency/48/resume.png",
+        "handler": function (response){
+            window.location.href = "/payment_success/{{ type }}";
+        },
+        "theme": {
+            "color": "#00c6ff"
+        }
+      };
+      var rzp = new Razorpay(options);
+      rzp.open();
+      e.preventDefault();
+    }
+  </script>
+
+</body>
+</html>

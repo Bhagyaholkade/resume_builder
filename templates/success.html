@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Generated Successfully</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #0f2027;
+      overflow-x: hidden;
+      text-align: center;
+      padding: 60px 20px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav h2 {
+      font-size: 28px;
+      color: #00c6ff;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00c6ff;
+    }
+
+    /* Floating animated background blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: float 30s ease-in-out infinite;
+    }
+
+    .blob:nth-child(1) {
+      background: #00c6ff;
+      width: 400px;
+      height: 400px;
+      top: -150px;
+      left: -150px;
+    }
+
+    .blob:nth-child(2) {
+      background: #5b247a;
+      width: 300px;
+      height: 300px;
+      top: 60%;
+      left: -120px;
+      animation-delay: 10s;
+    }
+
+    .blob:nth-child(3) {
+      background: #0072ff;
+      width: 500px;
+      height: 500px;
+      top: 30%;
+      right: -200px;
+      animation-delay: 5s;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(0) translateX(0); }
+      50%  { transform: translateY(-80px) translateX(60px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-top: 30px;
+      text-shadow: 2px 2px #0000004a;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      font-size: 20px;
+      margin: 20px 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      background: #00c6ff;
+      color: #fff;
+      padding: 14px 32px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      margin: 10px 10px;
+      display: inline-block;
+      transition: background 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      background: #0072ff;
+    }
+
+    .animation {
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating blobs background -->
+  <div class="blob"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <h2>📄 Resume Builder</h2>
+    <div>
+      <a href="{{ url_for('home') }}">Home</a>
+      {% if user_name %}
+        <a href="{{ url_for('profile') }}">Hello, {{ user_name }} 👤</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('google.login') }}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- Lottie Animation -->
+  <div class="animation">
+    <lottie-player 
+      src="https://assets1.lottiefiles.com/packages/lf20_9z7xvhxu.json"
+      background="transparent"
+      speed="1"
+      style="width: 300px; height: 300px;"
+      loop autoplay>
+    </lottie-player>
+  </div>
+
+  <h1>🎉 Resume Generated!</h1>
+  <p>Your {{ resume_type }} has been successfully created and is ready to download.</p>
+
+  <a href="{{ url_for('download_resume') }}" class="btn">📥 Download Resume</a>
+  <a href="{{ url_for('create_resume', type='normal') }}" class="btn">📝 Create Another</a>
+  <a href="{{ url_for('home') }}" class="btn">🏠 Home</a>
+
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Builder | Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* (Your existing CSS here — unchanged, perfect) */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav h2 {
+      font-size: 28px;
+      color: #00c6ff;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00c6ff;
+    }
+
+    .hero-section {
+      padding: 100px 20px 60px;
+    }
+
+    .hero-section h1 {
+      font-size: 54px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #0000004a;
+    }
+
+    .hero-section p {
+      font-size: 22px;
+      margin-bottom: 50px;
+      color: #ddd;
+    }
+
+    .options-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 50px 0;
+    }
+
+    .option-card {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 30px 20px;
+      width: 300px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .option-card:hover {
+      transform: translateY(-10px);
+      background: rgba(0, 198, 255, 0.1);
+    }
+
+    .option-card h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #00c6ff;
+    }
+
+    .option-card p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: #ddd;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #00c6ff;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #0072ff;
+    }
+
+    .icon {
+      position: absolute;
+      font-size: 50px;
+      opacity: 0.04;
+      animation: float 40s linear infinite;
+    }
+
+    .icon:nth-child(1) { top: 10%; left: 5%; animation-duration: 55s; }
+    .icon:nth-child(2) { top: 30%; left: 85%; animation-duration: 70s; }
+    .icon:nth-child(3) { top: 75%; left: 10%; animation-duration: 60s; }
+    .icon:nth-child(4) { top: 60%; left: 70%; animation-duration: 50s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-80px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating background icons -->
+  <div class="icon">📄</div>
+  <div class="icon">📝</div>
+  <div class="icon">💼</div>
+  <div class="icon">⭐</div>
+
+  <nav>
+    <h2>📄 Resume Builder</h2>
+    <div>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="#">About</a>
+      <a href="{{ url_for('payment_page', type='premium') }}">Premium</a>
+      {% if user_name %}
+        <a href="{{ url_for('profile') }}">Hello, {{ user_name }} 👤</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('google.login') }}">Login with Google</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="hero-section">
+    <h1>Create Beautiful Resumes Effortlessly ✨</h1>
+    <p>Select a professional template, fill your details, and download your resume instantly.</p>
+
+    <div class="options-container">
+      <div class="option-card">
+        <h3>📄 Normal Resume</h3>
+        <p>Create a clean, standard resume and download after ₹29 payment.</p>
+        <a href="{{ url_for('create_resume', type='normal') }}" class="btn">Start Normal Resume</a>
+      </div>
+
+      <div class="option-card">
+        <h3>⚙️ ATS Resume</h3>
+        <p>Generate ATS-optimized resumes, highly compatible with hiring systems. ₹99.</p>
+        <a href="{{ url_for('create_resume', type='ats') }}" class="btn">Start ATS Resume</a>
+      </div>
+
+      <div class="option-card">
+        <h3>🌟 Premium Resume</h3>
+        <p>Exclusive layouts and features for top-tier jobs. ₹149.</p>
+        <a href="{{ url_for('create_resume', type='premium') }}" class="btn">Start Premium Resume</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

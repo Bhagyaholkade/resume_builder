@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create ATS Optimized Resume</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #0f2027;
+      color: #fff;
+      padding: 50px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+    }
+
+    nav h2 {
+      font-size: 28px;
+      color: #00c6ff;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00c6ff;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 46px;
+      margin-bottom: 30px;
+    }
+
+    form {
+      max-width: 650px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 35px 25px;
+      border-radius: 20px;
+      margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      background: #00c6ff;
+      color: #fff;
+      font-size: 18px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0072ff;
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-top: 28px;
+    }
+
+    /* Floating icons */
+    .icon {
+      position: absolute;
+      font-size: 50px;
+      opacity: 0.03;
+      animation: float 40s linear infinite;
+    }
+
+    .icon:nth-child(1) { top: 8%; left: 5%; animation-duration: 60s; }
+    .icon:nth-child(2) { top: 25%; left: 85%; animation-duration: 50s; }
+    .icon:nth-child(3) { top: 65%; left: 10%; animation-duration: 70s; }
+    .icon:nth-child(4) { top: 80%; left: 70%; animation-duration: 55s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-80px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating background icons -->
+  <div class="icon">📄</div>
+  <div class="icon">📝</div>
+  <div class="icon">💼</div>
+  <div class="icon">⭐</div>
+
+  <nav>
+    <h2>⚙️ ATS Resume</h2>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="payment.html">Premium</a>
+    </div>
+  </nav>
+
+  <h1>ATS-Optimized Resume ✨</h1>
+
+  <form action="/generate_ats_resume" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="text" name="phone" placeholder="Phone Number" required>
+
+    <textarea name="summary" placeholder="Professional Summary (max 4 lines)" required></textarea>
+    <textarea name="experience" placeholder="Work Experience (title, company, years, description; separate jobs with '|')" required></textarea>
+    <textarea name="skills" placeholder="Skills (comma separated)" required></textarea>
+
+    <h3>Education</h3>
+    <input type="text" name="tenth" placeholder="10th - School Name | % | Year" required>
+    <input type="text" name="twelfth" placeholder="12th / PUC - College Name | % | Year" required>
+    <input type="text" name="degree" placeholder="Degree | Year of Passout | % / SGPA" required>
+
+    <h3>Social Profiles</h3>
+    <input type="url" name="linkedin" placeholder="LinkedIn Profile URL">
+    <input type="url" name="github" placeholder="GitHub Profile URL">
+
+    <button type="submit">Generate ATS Resume (₹99)</button>
+  </form>
+
+</body>
+</html>

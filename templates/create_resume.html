@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Resume</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #0f2027;
+      overflow-x: hidden;
+      color: #fff;
+      position: relative;
+      padding: 60px 20px;
+    }
+
+    /* Floating icons container */
+    #iconsContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .icon {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.2;
+      animation: floatIcons 20s linear infinite;
+    }
+
+    .icon:nth-child(1) { top: 10%; left: 5%; font-size: 32px; animation-duration: 22s; }
+    .icon:nth-child(2) { top: 50%; left: 85%; font-size: 38px; animation-duration: 26s; }
+    .icon:nth-child(3) { top: 90%; left: 20%; font-size: 35px; animation-duration: 20s; }
+    .icon:nth-child(4) { top: 70%; left: 50%; font-size: 30px; animation-duration: 18s; }
+    .icon:nth-child(5) { top: 30%; left: 70%; font-size: 34px; animation-duration: 24s; }
+
+    @keyframes floatIcons {
+      0%   { transform: translateY(0) rotate(0deg); }
+      50%  { transform: translateY(-60px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px 0 10px;
+      font-size: 42px;
+      text-shadow: 2px 2px #0000003a;
+      position: relative;
+      z-index: 2;
+    }
+
+    .animation {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      max-width: 650px;
+      margin: 20px auto 50px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      background: #00c6ff;
+      color: white;
+      font-size: 18px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0072ff;
+    }
+
+    h3 {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #ffe;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating icons background layer -->
+  <div id="iconsContainer">
+    <div class="icon">📄</div>
+    <div class="icon">💼</div>
+    <div class="icon">📑</div>
+    <div class="icon">⭐</div>
+    <div class="icon">📝</div>
+  </div>
+
+  <h1>Create Your Resume ✨</h1>
+
+  <!-- Lottie Animation -->
+  <div class="animation">
+    <lottie-player 
+      src="https://assets5.lottiefiles.com/packages/lf20_dyduzwck.json"
+      background="transparent"
+      speed="1"
+      style="width: 200px; height: 200px;"
+      loop autoplay>
+    </lottie-player>
+  </div>
+
+  <!-- Resume Form -->
+  <form action="/generate_resume" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="phone" placeholder="Phone Number" required>
+
+    <textarea name="summary" placeholder="Professional Summary" required></textarea>
+    <textarea name="experience" placeholder="Work Experience (title, company, years, description; separate jobs with '|')" required></textarea>
+    <textarea name="skills" placeholder="Skills (comma separated)" required></textarea>
+
+    <h3>Education Details 📚</h3>
+    <input type="text" name="tenth_school" placeholder="10th School Name" required>
+    <input type="text" name="tenth_percentage" placeholder="10th Percentage (%)" required>
+    <input type="text" name="tenth_year" placeholder="10th Year of Completion" required>
+
+    <input type="text" name="twelfth_college" placeholder="12th / PUC College Name" required>
+    <input type="text" name="twelfth_percentage" placeholder="12th / PUC Percentage (%)" required>
+    <input type="text" name="twelfth_year" placeholder="12th / PUC Year of Completion" required>
+
+    <input type="text" name="degree" placeholder="Degree (e.g. B.E, B.Tech, BCA)" required>
+    <input type="text" name="degree_passout" placeholder="Degree Year of Passout" required>
+    <input type="text" name="degree_score" placeholder="Degree SGPA / Percentage" required>
+
+    <h3>Social Profiles 🔗</h3>
+    <input type="url" name="linkedin" placeholder="LinkedIn Profile URL">
+    <input type="url" name="github" placeholder="GitHub Profile URL">
+
+    <button type="submit">Generate ATS Resume (PDF)</button>
+  </form>
+
+  <!-- LottiePlayer Script -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+</body>
+</html>
